@@ -1,4 +1,4 @@
-object BinaryGap extends App {
+object BinaryGap {
   def solution(n: Int): Int = {
     def binaryGap(binary: String, currentGap: Int, gaps: List[Int]): List[Int] = {
       if (binary.isEmpty)
@@ -19,6 +19,4 @@ object BinaryGap extends App {
         list.max
     } else 0
   }
-
-  println(solution(129))
 }
