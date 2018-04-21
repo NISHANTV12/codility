@@ -1,27 +1,44 @@
-object TapeEquilibrium extends App {
+object TapeEquilibrium {
   def solution(a: Array[Int]): Int = {
-    val i     = diffTwoParts(a, a.length / 2)
-    val tuple = a.splitAt(i)
+    val splitPoint = a.length / 2
+    val parts      = a.splitAt(splitPoint)
+
+    val equilibrium =
+      if (parts._1.sum > parts._2.sum)
+        shiftLeft(a, splitPoint)
+      else
+        shiftRight(a, splitPoint)
+
+    val tuple = a.splitAt(equilibrium)
     Math.abs(tuple._1.sum - tuple._2.sum)
   }
 
-  private def diffTwoParts(a: Array[Int], splitPoint: Int): Int = {
-    def loop(a: Array[Int], previousSplitPoint: Int, currentSplitPoint: Int): Int = {
-      println(previousSplitPoint + " " + currentSplitPoint)
-      if (currentSplitPoint == previousSplitPoint)
-        currentSplitPoint
-      else {
-        val parts = a.splitAt(currentSplitPoint)
-        println(parts._1.mkString(",") + ":" + parts._2.mkString(","))
-        println()
-        if (parts._1.sum > parts._2.sum)
-          loop(a, currentSplitPoint, a.length / 2 - parts._1.length / 2)
-        else
-          loop(a, currentSplitPoint, a.length / 2 + parts._2.length / 2)
-      }
-    }
-    loop(a, 0, splitPoint)
+  private def shiftLeft(a: Array[Int], splitPoint: Int): Int =
+    shift(a, splitPoint, validateLeftShift, _ - 1)
+
+  private def shiftRight(a: Array[Int], splitPoint: Int): Int =
+    shift(a, splitPoint, validateRightShift, _ + 1)
+
+  private def shift(
+      a: Array[Int],
+      splitPoint: Int,
+      condition: (Array[Int], Int) ⇒ Boolean,
+      shiftExpression: Int ⇒ Int
+  ): Int = {
+    if (!condition(a, splitPoint))
+      splitPoint
+    else
+      shift(a, shiftExpression(splitPoint), condition, shiftExpression)
   }
 
-  println(solution(Array(3, 1, 2, 4, 3, 6, 1000)))
+  private def validateRightShift(a: Array[Int], splitPoint: Int) = {
+    val parts = a.splitAt(splitPoint + 1)
+    parts._1.sum < parts._2.sum && splitPoint + 1 < a.length
+  }
+
+  private def validateLeftShift(a: Array[Int], splitPoint: Int) = {
+    val parts = a.splitAt(splitPoint - 1)
+    parts._1.sum > parts._2.sum && splitPoint - 1 > 0
+  }
+
 }
