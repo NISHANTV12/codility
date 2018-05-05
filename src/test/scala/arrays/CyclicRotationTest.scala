@@ -1,3 +1,5 @@
+package arrays
+
 import org.scalatest.{FunSuite, Matchers}
 
 class CyclicRotationTest extends FunSuite with Matchers {

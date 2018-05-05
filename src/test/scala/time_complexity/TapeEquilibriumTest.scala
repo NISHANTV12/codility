@@ -1,3 +1,5 @@
+package time_complexity
+
 import org.scalatest.{FunSuite, Matchers}
 
 class TapeEquilibriumTest extends FunSuite with Matchers {

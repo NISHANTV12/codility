@@ -1,3 +1,5 @@
+package iterations
+
 object BinaryGap {
   def solution(n: Int): Int = {
     def binaryGap(binary: String, currentGap: Int, gaps: List[Int]): List[Int] = {

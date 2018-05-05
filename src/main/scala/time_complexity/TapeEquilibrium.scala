@@ -1,3 +1,5 @@
+package time_complexity
+
 import scala.annotation.tailrec
 
 object TapeEquilibrium {

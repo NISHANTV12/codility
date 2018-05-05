@@ -1,3 +1,5 @@
+package arrays
+
 object OddOccurrencesInArray {
 
   private def isOddNumberOfElements(a: Array[Int]): Boolean = if (a.length % 2 == 1) true else false

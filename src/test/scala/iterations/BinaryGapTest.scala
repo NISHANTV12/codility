@@ -1,4 +1,6 @@
-import BinaryGap.solution
+package iterations
+
+import iterations.BinaryGap.solution
 import org.scalatest.{FunSuite, Matchers}
 
 class BinaryGapTest extends FunSuite with Matchers {

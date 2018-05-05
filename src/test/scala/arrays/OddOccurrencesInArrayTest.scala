@@ -1,3 +1,5 @@
+package arrays
+
 import org.scalatest.{FunSuite, Matchers}
 
 class OddOccurrencesInArrayTest extends FunSuite with Matchers {
